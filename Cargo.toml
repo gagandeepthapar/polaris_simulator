@@ -1,0 +1,12 @@
+[package]
+name = "polaris_simulator"
+version = "0.1.0"
+edition = "2021"
+
+[dependencies]
+clap = "4.5.36"
+altai-rs = { path = "../altai-rs" }
+polaris_fsw = { path = "../polaris_fsw" }
+polaris_plant = { path = "../polaris_plant" }
+polaris_log = { path = "../polaris_log" }
+ndarray = "0.16.1"
