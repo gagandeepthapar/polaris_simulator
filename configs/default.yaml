@@ -1,0 +1,29 @@
+Sensors:
+
+Estimation:
+
+Reference:
+
+Control:
+
+Actuators:
+
+Multibody:
+  j_multibody:
+    - [10, 0, 0]
+    - [0, 20, 0]
+    - [0, 0, 30]
+
+SC_Actuators:
+
+SC_Ephemeris:
+
+SC_Attitude:
+
+SC_Multibody:
+  j_multibody:
+    - [10, 0, 0]
+    - [0, 20, 0]
+    - [0, 0, 30]
+
+SC_Sensors:
