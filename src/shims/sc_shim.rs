@@ -1,5 +1,4 @@
 use crate::plant::sc_types::*;
-use altai_rs::meta::types::Vector3;
 use ndarray::array;
 
 use serde::Deserialize;
