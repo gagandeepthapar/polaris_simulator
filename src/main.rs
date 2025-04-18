@@ -1,12 +1,11 @@
 pub mod shims;
 
-use altai_rs::quatlib::qangle;
 use polaris_fsw as fsw;
 use polaris_fsw::actuators::types::ActuatorBus;
 use polaris_plant::{self as plant};
 
 use serde_yaml;
-use std::{f64::consts::PI, fs, time};
+use std::{fs, time};
 
 use env_logger;
 use log;
