@@ -10,3 +10,7 @@ polaris_fsw = { path = "../polaris_fsw" }
 polaris_plant = { path = "../polaris_plant" }
 polaris_log = { path = "../polaris_log" }
 ndarray = "0.16.1"
+serde_yaml = "0.9.34"
+serde = { version = "1.0.219", features = ["derive"] }
+log = "0.4.27"
+env_logger = "0.11.8"
