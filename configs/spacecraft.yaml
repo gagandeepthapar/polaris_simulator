@@ -1,0 +1,48 @@
+Sensors:
+Estimation:
+Reference:
+Control:
+Actuators:
+Multibody:
+  j_multibody:
+    - - 10
+      - 0
+      - 0
+    - - 0
+      - 20
+      - 0
+    - - 0
+      - 0
+      - 30
+SC_Actuators:
+SC_Ephemeris:
+  r_sc:
+    - - 7278000.0
+      - 0.0
+      - 0.0
+  v_sc:
+    - - 0.0
+      - 7400.526558956557
+      - 0.0
+SC_Attitude:
+  q_sc_eci:
+    - - 0
+      - 0
+      - 0
+      - 1
+  omega_sc:
+    - - 0.003490658503988659
+      - 0.0017453292519943296
+      - 0.005235987755982988
+SC_Multibody:
+  j_multibody:
+    - - 10
+      - 0
+      - 0
+    - - 0
+      - 20
+      - 0
+    - - 0
+      - 0
+      - 30
+SC_Sensors:
