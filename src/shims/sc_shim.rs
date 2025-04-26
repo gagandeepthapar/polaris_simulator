@@ -1,7 +1,13 @@
 use crate::plant::sc_types::*;
-use ndarray::array;
-
+use altai_rs::meta::types::{Quaternion4, Vector3};
 use serde::Deserialize;
+
+/*
+
+SHIMS are used to convert from INPUT file into POLARIS TYPES
+Common use case is for initialization
+
+*/
 
 pub trait Spacecraft_Shim {
     type Spacecraft_Analog: SpacecraftParam;
@@ -39,20 +45,33 @@ impl Spacecraft_Shim for SpacecraftActuatorShim {
 }
 
 #[derive(Clone, Default, Debug, Deserialize)]
-pub struct SpacecraftEphemerisShim {}
+pub struct SpacecraftEphemerisShim {
+    pub r_sc: [[f64; 3]; 1],
+    pub v_sc: [[f64; 3]; 1],
+}
 impl Spacecraft_Shim for SpacecraftEphemerisShim {
     type Spacecraft_Analog = SpacecraftEphemerisArchitecture;
     fn to_spacecraft(&self) -> Self::Spacecraft_Analog {
-        SpacecraftEphemerisArchitecture::default()
+        SpacecraftEphemerisArchitecture::initialize(
+            Vector3::from_shape_vec((3, 1), self.r_sc[0].to_vec()).unwrap(),
+            Vector3::from_shape_vec((3, 1), self.v_sc[0].to_vec()).unwrap(),
+        )
     }
 }
 
 #[derive(Clone, Default, Debug, Deserialize)]
-pub struct SpacecraftAttitudeShim {}
+pub struct SpacecraftAttitudeShim {
+    pub q_sc_eci: [[f64; 4]; 1],
+    pub omega_sc: [[f64; 3]; 1],
+}
 impl Spacecraft_Shim for SpacecraftAttitudeShim {
     type Spacecraft_Analog = SpacecraftAttitudeArchitecture;
+
     fn to_spacecraft(&self) -> Self::Spacecraft_Analog {
-        SpacecraftAttitudeArchitecture::default()
+        SpacecraftAttitudeArchitecture::initialize(
+            Quaternion4::from_shape_vec((4, 1), self.q_sc_eci[0].to_vec()).unwrap(),
+            Vector3::from_shape_vec((3, 1), self.omega_sc[0].to_vec()).unwrap(),
+        )
     }
 }
 
@@ -73,16 +92,8 @@ pub struct SpacecraftMultibodyShim {
 impl Spacecraft_Shim for SpacecraftMultibodyShim {
     type Spacecraft_Analog = SpacecraftMultibodyArchitecture;
     fn to_spacecraft(&self) -> Self::Spacecraft_Analog {
-        SpacecraftMultibodyArchitecture::initialize(array![[
-            self.j_multibody[0][0],
-            self.j_multibody[0][1],
-            self.j_multibody[0][2],
-            self.j_multibody[1][0],
-            self.j_multibody[1][1],
-            self.j_multibody[1][2],
-            self.j_multibody[2][0],
-            self.j_multibody[2][1],
-            self.j_multibody[2][2]
-        ]])
+        SpacecraftMultibodyArchitecture::initialize(
+            Vector3::from_shape_vec((3, 3), self.j_multibody.as_flattened().to_vec()).unwrap(),
+        )
     }
 }
